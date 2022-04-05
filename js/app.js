@@ -1,5 +1,4 @@
 const elList = document.getElementById("main-list");
-const item = document.querySelectorAll(".insta__item");
 
 
 showIt(object, 1);
@@ -14,17 +13,46 @@ function showIt(array, num){
      </div>
      `;
 
-     if(num == 1){      
-      elList.appendChild(li);
-    }
+     elList.appendChild(li);
   });
 }
-
-item.forEach((el) =>{
-  el.addEventListener("click", () =>{
-    el.style.scale = "1.5"
-  });
-});
+object.forEach((item, index) =>{
+  let items = document.querySelectorAll(".insta__item");
+  items.forEach(el =>{
+    el.addEventListener("click", () =>{
+      el.className = `insta__item actives d-flex flex-column justify-content-between`;
+      el.innerHTML = `
+      <button id="left" class="insta__btn"><i class='bx bx-chevron-left ikon' ></i></button>
+      <div class="insta__media">
+        <span class="insta__time"></span>
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="insta__inner d-flex align-items-center">
+            <img class="insta__img" src="https://picsum.photos/id/180/35/35" alt="img">
+            <a class="insta__link text-decoration-none" href="#">${item.text}</a>
+          </div> 
+          <div class="insta__ikons">
+            <i class='bx bx-pause insta__ikon'></i>
+            <i class='bx bxs-volume-full insta__ikon' ></i>
+            <i class='bx bx-dots-horizontal-rounded insta__ikon' ></i>
+          </div>
+        </div>
+      </div>
+      <div class="insta__imgbox">
+        <!-- <video width="400" height="520" controls>
+          <source src="videos/data-two.mp4" type="video/mp4">
+        </video> -->
+        <img class="insta__imgs" src="${item.media[0]}" alt="img">
+      </div>
+      <form class="insta__message d-flex align-items-center">
+        <input type="text" class="insta__text" placeholder="Ответьте UserName…">
+        <i class='bx bx-send'></i>
+      </form> 
+      <button id="right" class="insta__btn"><i class='bx bx-chevron-right ikon' ></i> </button>
+      `;
+    })
+  })
+  
+})
 
 
 let leftBtn = document.getElementById('slide-left');
